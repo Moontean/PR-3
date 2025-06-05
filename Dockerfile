@@ -1,7 +1,6 @@
-FROM node:18
-WORKDIR /app
-COPY package.json .
-RUN npm install
-COPY . .
-EXPOSE 5000
-CMD ["npm", "start"]
+FROM postgres:15
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=password
+ENV POSTGRES_DB=project_db
+COPY init.sql /docker-entrypoint-initdb.d/
+EXPOSE 5432
